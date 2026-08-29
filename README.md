@@ -56,38 +56,53 @@ The project uses a `RETAIL_SALES_ANALYSIS` table containing the following column
 | `cogs` | FLOAT | Cost of goods sold |
 | `total_sale` | FLOAT | Total value of the transaction |
 
-🛠️ Technologies Used
-SQL
-PostgreSQL / SQL-based relational database
+
+
+## 🛠️ Technologies & SQL Concepts Used
+
+| Category | Technologies / Concepts |
+|---|---|
+| Database | SQL |
+| Data Analysis | Data Cleaning, Data Validation, Data Aggregation |
+| Filtering | `WHERE`, `HAVING` |
+| Aggregation | `COUNT()`, `SUM()`, `AVG()`, `MAX()`, `MIN()` |
+| Sorting | `ORDER BY` |
+| Conditional Logic | `CASE WHEN` |
+| Date Analysis | `EXTRACT()`, `TO_CHAR()` |
+| Advanced SQL | CTEs, Subqueries, Window Functions |
+| Ranking | `RANK()` |
+
+
+## 🔄 Project Workflow
+
+```text
+Raw Retail Data
+       ↓
 Database & Table Creation
+       ↓
+Data Import
+       ↓
+Data Validation
+       ↓
 Data Cleaning
-Data Exploration
-Data Aggregation
-Business Analysis
-SQL Concepts Used
-CREATE DATABASE
-CREATE TABLE
-SELECT
-WHERE
-DISTINCT
-COUNT()
-SUM()
-AVG()
-MAX()
-MIN()
-GROUP BY
-ORDER BY
-HAVING
-CASE WHEN
-EXTRACT()
-TO_CHAR()
-ROUND()
-LIMIT
-WITH / CTE
-Subqueries
-COUNT(DISTINCT)
-Window Functions
-RANK()
+       ↓
+Exploratory Data Analysis
+       ↓
+Sales Analysis
+       ↓
+Customer Behavior Analysis
+       ↓
+Gender-Based Analysis
+       ↓
+Monthly & Yearly Analysis
+       ↓
+Time-Shift Analysis
+       ↓
+Business Insights
+```
+
+
+
 ```sql
 CREATE DATABASE p1_retail_db;
 
