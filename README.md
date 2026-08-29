@@ -1,27 +1,82 @@
-# Retail Sales Analysis SQL Project
+**🛍️ Retail Sales Analysis Using SQL**
 
-## Project Overview
+**📌 Project Overview**
 
-**Project Title**: Retail Sales Analysis  
-**Level**: Beginner  
-**Database**: `p1_retail_db`
+This project is a Retail Sales Analysis project built using SQL to analyze retail transaction data and extract meaningful business insights.
 
-This project is designed to demonstrate SQL skills and techniques typically used by data analysts to explore, clean, and analyze retail sales data. The project involves setting up a retail sales database, performing exploratory data analysis (EDA), and answering specific business questions through SQL queries. This project is ideal for those who are starting their journey in data analysis and want to build a solid foundation in SQL.
+The analysis covers the complete workflow of a SQL-based data analytics project, starting from database and table creation, data validation and cleaning, exploratory data analysis, and finally business-oriented analysis.
 
-## Objectives
+The primary objective of this project is to understand sales performance, customer behavior, purchasing patterns, product category performance, gender-wise purchasing behavior, and sales trends across different time periods.
 
-1. **Set up a retail sales database**: Create and populate a retail sales database with the provided sales data.
-2. **Data Cleaning**: Identify and remove any records with missing or null values.
-3. **Exploratory Data Analysis (EDA)**: Perform basic exploratory data analysis to understand the dataset.
-4. **Business Analysis**: Use SQL to answer specific business questions and derive insights from the sales data.
 
-## Project Structure
+**🎯 Project Objectives**
 
-### 1. Database Setup
+The major objectives of this project are:
 
-- **Database Creation**: The project starts by creating a database named `p1_retail_db`.
-- **Table Creation**: A table named `retail_sales` is created to store the sales data. The table structure includes columns for transaction ID, sale date, sale time, customer ID, gender, age, product category, quantity sold, price per unit, cost of goods sold (COGS), and total sale amount.
+1.Analyze overall retail sales performance
+2.Understand customer demographics and purchasing behavior
+3.Compare purchasing patterns between male and female customers
+4.Identify the best-performing product categories
+5.Analyze sales trends by month and year
+6.Identify the best-selling month in each year
+7.Find the top customers based on total spending
+8.Analyze sales and customer behavior across different time shifts
+9.Identify peak shopping periods
+10.Understand category preferences across genders and time shifts
+11.Clean and validate the retail transaction dataset using SQL
 
+
+
+**🗂️ Dataset Structure**
+
+#The project uses a RETAIL_SALES table containing the following columns:
+
+-Column	Data Type	Description
+-transactions_id	INT	Unique transaction identifier
+-sale_date	DATE	Date of the transaction
+-sale_time	TIME	Time of the transaction
+-customer_id	INT	Unique customer identifier
+-gender	VARCHAR	Customer gender
+-age	INT	Customer age
+-category	VARCHAR	Product category
+-quantity	INT	Quantity purchased
+-price_per_unit	FLOAT	Price per unit
+-cogs	FLOAT	Cost of goods sold
+-total_sale	FLOAT	Total value of the transaction
+
+
+🛠️ Technologies Used
+SQL
+PostgreSQL / SQL-based relational database
+Database & Table Creation
+Data Cleaning
+Data Exploration
+Data Aggregation
+Business Analysis
+SQL Concepts Used
+CREATE DATABASE
+CREATE TABLE
+SELECT
+WHERE
+DISTINCT
+COUNT()
+SUM()
+AVG()
+MAX()
+MIN()
+GROUP BY
+ORDER BY
+HAVING
+CASE WHEN
+EXTRACT()
+TO_CHAR()
+ROUND()
+LIMIT
+WITH / CTE
+Subqueries
+COUNT(DISTINCT)
+Window Functions
+RANK()
 ```sql
 CREATE DATABASE p1_retail_db;
 
@@ -202,26 +257,18 @@ GROUP BY shift
 
 ## Conclusion
 
-This project serves as a comprehensive introduction to SQL for data analysts, covering database setup, data cleaning, exploratory data analysis, and business-driven SQL queries. The findings from this project can help drive business decisions by understanding sales patterns, customer behavior, and product performance.
+This project focuses on performing a comprehensive Retail Sales Analysis using SQL to uncover meaningful insights from retail transaction data. The analysis explores sales trends, customer purchasing behavior, gender-based purchasing patterns, time-based sales performance, and monthly/yearly revenue trends.
+
+The primary objective of this project is to transform raw retail transaction data into actionable business insights that can help understand customer behavior, identify high-performing periods, and support data-driven business decisions.
 
 ## How to Use
 
 1. **Clone the Repository**: Clone this project repository from GitHub.
-2. **Set Up the Database**: Run the SQL scripts provided in the `database_setup.sql` file to create and populate the database.
-3. **Run the Queries**: Use the SQL queries provided in the `analysis_queries.sql` file to perform your analysis.
+2. **Set Up the Database**: First set up a database on any SQL platform like PostgreSQL , MySQL and populate the database.
+3. **Run the Queries**: Use the SQL queries provided in the `RETAIL_SALE_ANALYSIS.sql` file to perform your analysis.
 4. **Explore and Modify**: Feel free to modify the queries to explore different aspects of the dataset or answer additional business questions.
 
-## Author - Zero Analyst
+## Author - Asish Kumar Sahoo
 
 This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
 
-### Stay Updated and Join the Community
-
-For more content on SQL, data analysis, and other data-related topics, make sure to follow me on social media and join our community:
-
-- **YouTube**: [Subscribe to my channel for tutorials and insights](https://www.youtube.com/@zero_analyst)
-- **Instagram**: [Follow me for daily tips and updates](https://www.instagram.com/zero_analyst/)
-- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/najirr)
-- **Discord**: [Join our community to learn and grow together](https://discord.gg/36h5f2Z5PK)
-
-Thank you for your support, and I look forward to connecting with you!
