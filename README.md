@@ -40,32 +40,21 @@
 
 ## 🗂️ Dataset Structure
 
-### The project uses a RETAIL_SALES table containing the following columns:
+The project uses a `RETAIL_SALES_ANALYSIS` table containing the following columns:
 
-**Column**	          **Data Type**	        **Description**
-
-**transactions_id**	   INT	                Unique transaction identifier
-
-**sale_date**          DATE             	Date of the transaction
-
-**sale_time**	       TIME                 Time of the transaction
-
-**customer_id**	       INT	                Unique customer identifier
-
-**gender**	           VARCHAR	            Customer gender
-
-**age**	               INT	                Customer age
-
-**category**	       VARCHAR	            Product category
-
-**quantity**	       INT	                Quantity purchased
-
-**price_per_unit**	   FLOAT	            Price per unit
-
-**cogs**	           FLOAT	            Cost of goods sold
-
-**total_sale**	       FLOAT	            Total value of the transaction
-
+| Column | Data Type | Description |
+|---|---|---|
+| `transactions_id` | INT | Unique transaction identifier |
+| `sale_date` | DATE | Date of the transaction |
+| `sale_time` | TIME | Time of the transaction |
+| `customer_id` | INT | Unique customer identifier |
+| `gender` | VARCHAR | Gender of the customer |
+| `age` | INT | Age of the customer |
+| `category` | VARCHAR | Product category |
+| `quantity` | INT | Quantity purchased |
+| `price_per_unit` | FLOAT | Price of one unit |
+| `cogs` | FLOAT | Cost of goods sold |
+| `total_sale` | FLOAT | Total value of the transaction |
 
 🛠️ Technologies Used
 SQL
