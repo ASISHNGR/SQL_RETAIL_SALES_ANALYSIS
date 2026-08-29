@@ -13,27 +13,27 @@
 
 ### The major objectives of this project are:
 
--**Analyze overall retail sales performance**
+**Analyze overall retail sales performance**
 
--**Understand customer demographics and purchasing behavior**
+**Understand customer demographics and purchasing behavior**
 
--**Compare purchasing patterns between male and female customers**
+**Compare purchasing patterns between male and female customers**
 
--**Identify the best-performing product categories**
+**Identify the best-performing product categories**
 
--**Analyze sales trends by month and year**
+**Analyze sales trends by month and year**
 
--**Identify the best-selling month in each year**
+**Identify the best-selling month in each year**
 
--**Find the top customers based on total spending**
+**Find the top customers based on total spending**
 
--**Analyze sales and customer behavior across different time shifts**
+**Analyze sales and customer behavior across different time shifts**
 
--**Identify peak shopping periods**
+**Identify peak shopping periods**
 
--**Understand category preferences across genders and time shifts**
+**Understand category preferences across genders and time shifts**
 
--**Clean and validate the retail transaction dataset using SQL**
+**Clean and validate the retail transaction dataset using SQL**
 
 
 
@@ -42,18 +42,18 @@
 
 ### The project uses a RETAIL_SALES table containing the following columns:
 
--**Column	Data Type	Description**
--**transactions_id	INT	Unique transaction identifier**
--**sale_date	DATE	Date of the transaction**
--**sale_time	TIME	Time of the transaction**
--**customer_id	INT	Unique customer identifier**
--**gender	VARCHAR	Customer gender**
--**age	INT	Customer age**
--**category	VARCHAR	Product category**
--**quantity	INT	Quantity purchased**
--**price_per_unit	FLOAT	Price per unit**
--**cogs	FLOAT	Cost of goods sold**
--**total_sale	FLOAT	Total value of the transaction**
+**Column**	          **Data Type**	        **Description**
+**transactions_id**	   INT	                Unique transaction identifier
+**sale_date**          DATE             	Date of the transaction
+**sale_time**	       TIME                 Time of the transaction
+**customer_id**	       INT	                Unique customer identifier
+**gender**	           VARCHAR	            Customer gender
+**age**	               INT	                Customer age
+**category**	       VARCHAR	            Product category
+**quantity**	       INT	                Quantity purchased
+**price_per_unit**	   FLOAT	            Price per unit
+**cogs**	           FLOAT	            Cost of goods sold
+**total_sale**	       FLOAT	            Total value of the transaction
 
 
 🛠️ Technologies Used
