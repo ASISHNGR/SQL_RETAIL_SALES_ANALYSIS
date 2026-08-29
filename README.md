@@ -2,47 +2,47 @@
 
 ## 📌 Project Overview
 
-This project is a Retail Sales Analysis project built using SQL to analyze retail transaction data and extract meaningful business insights.
+-**This project is a Retail Sales Analysis project built using SQL to analyze retail transaction data and extract meaningful business insights.**
 
-The analysis covers the complete workflow of a SQL-based data analytics project, starting from database and table creation, data validation and cleaning, exploratory data analysis, and finally business-oriented analysis.
+-**The analysis covers the complete workflow of a SQL-based data analytics project, starting from database and table creation, data validation and cleaning, exploratory data analysis, and finally business-oriented analysis.**
 
-The primary objective of this project is to understand sales performance, customer behavior, purchasing patterns, product category performance, gender-wise purchasing behavior, and sales trends across different time periods.
-
-
-**🎯 Project Objectives**
-
-The major objectives of this project are:
-
-1.Analyze overall retail sales performance
-2.Understand customer demographics and purchasing behavior
-3.Compare purchasing patterns between male and female customers
-4.Identify the best-performing product categories
-5.Analyze sales trends by month and year
-6.Identify the best-selling month in each year
-7.Find the top customers based on total spending
-8.Analyze sales and customer behavior across different time shifts
-9.Identify peak shopping periods
-10.Understand category preferences across genders and time shifts
-11.Clean and validate the retail transaction dataset using SQL
+-**The primary objective of this project is to understand sales performance, customer behavior, purchasing patterns, product category performance, gender-wise purchasing behavior, and sales trends across different time periods.**
 
 
+## 🎯 Project Objectives**
 
-**🗂️ Dataset Structure**
+### The major objectives of this project are:
 
-#The project uses a RETAIL_SALES table containing the following columns:
+-**Analyze overall retail sales performance**
+-**Understand customer demographics and purchasing behavior**
+-**Compare purchasing patterns between male and female customers**
+-**Identify the best-performing product categories**
+-**Analyze sales trends by month and year**
+-**Identify the best-selling month in each year**
+-**Find the top customers based on total spending**
+-**Analyze sales and customer behavior across different time shifts**
+-**Identify peak shopping periods**
+-**Understand category preferences across genders and time shifts**
+-**Clean and validate the retail transaction dataset using SQL**
 
--Column	Data Type	Description
--transactions_id	INT	Unique transaction identifier
--sale_date	DATE	Date of the transaction
--sale_time	TIME	Time of the transaction
--customer_id	INT	Unique customer identifier
--gender	VARCHAR	Customer gender
--age	INT	Customer age
--category	VARCHAR	Product category
--quantity	INT	Quantity purchased
--price_per_unit	FLOAT	Price per unit
--cogs	FLOAT	Cost of goods sold
--total_sale	FLOAT	Total value of the transaction
+
+
+## 🗂️ Dataset Structure
+
+### The project uses a RETAIL_SALES table containing the following columns:
+
+-**Column	Data Type	Description**
+-**transactions_id	INT	Unique transaction identifier**
+-**sale_date	DATE	Date of the transaction**
+-**sale_time	TIME	Time of the transaction**
+-**customer_id	INT	Unique customer identifier**
+-**gender	VARCHAR	Customer gender**
+-**age	INT	Customer age**
+-**category	VARCHAR	Product category**
+-**quantity	INT	Quantity purchased**
+-**price_per_unit	FLOAT	Price per unit**
+-**cogs	FLOAT	Cost of goods sold**
+-**total_sale	FLOAT	Total value of the transaction**
 
 
 🛠️ Technologies Used
