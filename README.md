@@ -91,7 +91,7 @@ Business Insights
 ---
 
 ## 🧹 1.Database & Table Creation
-```
+```sql
 --CREATE A DATABASE FOR RETAIL_SALES_ANALYSIS
 
 CREATE DATABASE Retail_Sales_Analysis;
@@ -113,25 +113,6 @@ CREATE TABLE RETAIL_SALES
 	total_sale FLOAT
 );
 
-```
-
-```sql
-CREATE DATABASE p1_retail_db;
-
-CREATE TABLE retail_sales
-(
-    transactions_id INT PRIMARY KEY,
-    sale_date DATE,	
-    sale_time TIME,
-    customer_id INT,	
-    gender VARCHAR(10),
-    age INT,
-    category VARCHAR(35),
-    quantity INT,
-    price_per_unit FLOAT,	
-    cogs FLOAT,
-    total_sale FLOAT
-);
 ```
 
 ### 2. Data Exploration & Cleaning
