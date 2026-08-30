@@ -90,7 +90,7 @@ Business Insights
 ```
 ---
 
-## 🧹 1.Database & Table Creation
+## 🗂️ 1.Database & Table Creation
 ```sql
 --CREATE A DATABASE FOR RETAIL_SALES_ANALYSIS
 
@@ -115,30 +115,113 @@ CREATE TABLE RETAIL_SALES
 
 ```
 
-### 2. Data Exploration & Cleaning
+## 🧹 2. Data Validation & Cleaning
 
-- **Record Count**: Determine the total number of records in the dataset.
-- **Customer Count**: Find out how many unique customers are in the dataset.
-- **Category Count**: Identify all unique product categories in the dataset.
-- **Null Value Check**: Check for any null values in the dataset and delete records with missing data.
+Before performing the analysis, the dataset was checked for potential data-quality issues.
 
+### Data Validation Includes
+
+- Checking the total number of records
+- Inspecting the complete dataset
+- Identifying unique product categories
+- Checking for missing values
+- Checking for duplicate transaction IDs
+
+### Missing Value Analysis
+
+Important columns were checked for missing values:
+
+- Transaction ID
+- Sale Date
+- Sale Time
+- Customer ID
+- Gender
+- Age
+- Category
+- Quantity
+- Price per Unit
+- COGS
+- Total Sale
+
+Records containing missing values were removed before performing the main analysis.
+
+### Duplicate Analysis
+
+Duplicate transaction IDs were identified using `GROUP BY` and `HAVING`.
+
+This helped ensure that the analysis was performed on a **clean and reliable dataset**.
 ```sql
-SELECT COUNT(*) FROM retail_sales;
-SELECT COUNT(DISTINCT customer_id) FROM retail_sales;
-SELECT DISTINCT category FROM retail_sales;
 
-SELECT * FROM retail_sales
-WHERE 
-    sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR 
-    gender IS NULL OR age IS NULL OR category IS NULL OR 
-    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL;
+--FETCHING ALL THE RECORDS FROM TABLE
+SELECT * FROM RETAIL_SALES
 
-DELETE FROM retail_sales
-WHERE 
-    sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR 
-    gender IS NULL OR age IS NULL OR category IS NULL OR 
-    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL;
+
+--COUNT ALL THE RECORDS FROM TABLE FOR VALIDATING THE RECORDS IS CORRECTLY IMPORTED OR NOT 
+SELECT COUNT(*)
+FROM RETAIL_SALES
+
+
+--WHAT ARE THE PRODUCTS CATEGORY WE HAVE 
+SELECT DISTINCT CATEGORY 
+FROM RETAIL_SALES
+
+
+--CHECKING THE MISSING RECORDS IN THE DATASET 
+SELECT * 
+FROM RETAIL_SALES
+WHERE TRANSACTIONS_ID IS NULL 
+   OR SALE_DATE IS NULL 
+   OR SALE_TIME IS NULL 
+   OR CUSTOMER_ID IS NULL
+   OR GENDER IS NULL
+   OR AGE IS NULL	
+   OR CATEGORY IS NULL
+   OR QUANTITY IS NULL
+   OR PRICE_PER_UNIT IS NULL
+   OR COGS IS NULL
+   OR TOTAL_SALE IS NULL
+
+
+--CHECKING THE DUPLICATE RECORDS
+SELECT TRANSACTIONS_ID,COUNT(TRANSACTIONS_ID) AS COUNT_TRANSACTIONS_ID
+FROM RETAIL_SALES
+GROUP BY TRANSACTIONS_ID
+HAVING COUNT(TRANSACTIONS_ID) > 1
+
+
+
+
+--DATA CLEANING :--
+
+--REMOVING THE MISSING RECORDS AND DUPLICATE RECORDS FROM THE TABLE
+
+
+--DELETING THE MISSING RECORDS FROM THE TABLE
+DELETE FROM RETAIL_SALES
+WHERE TRANSACTIONS_ID IS NULL 
+   OR SALE_DATE IS NULL 
+   OR SALE_TIME IS NULL 
+   OR CUSTOMER_ID IS NULL
+   OR GENDER IS NULL
+   OR AGE IS NULL	
+   OR CATEGORY IS NULL
+   OR QUANTITY IS NULL
+   OR PRICE_PER_UNIT IS NULL
+   OR COGS IS NULL
+   OR TOTAL_SALE IS NULL
+
+
+--DELECTING THE DUPLICATE RECORDS FROM THE TABLE
+DELETE FROM RETAIL_SALES
+WHERE TRANSACTIONS_ID IN (
+	SELECT TRANSACTIONS_ID
+	FROM RETAIL_SALES
+	GROUP BY TRANSACTIONS_ID
+	HAVING COUNT(TRANSACTIONS_ID) > 1
+	)
 ```
+
+---
 
 ### 3. Data Analysis & Findings
 
