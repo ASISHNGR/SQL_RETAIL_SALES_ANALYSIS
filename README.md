@@ -749,7 +749,7 @@ Retail-Sales-Analysis/
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone <https://github.com/ASISHNGR/SQL_RETAIL_SALES_ANALYSIS.git>
 ```
 
 ### 2. Navigate to the Project
