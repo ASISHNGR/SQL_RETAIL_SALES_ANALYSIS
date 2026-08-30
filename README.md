@@ -1,5 +1,6 @@
 # 🛍️ Retail Sales Analysis Using SQL
 
+---
 ## 📌 Project Overview
 
 **This project is a Retail Sales Analysis project built using SQL to analyze retail transaction data and extract meaningful business insights.**
@@ -8,35 +9,22 @@
 
 **The primary objective of this project is to understand sales performance, customer behavior, purchasing patterns, product category performance, gender-wise purchasing behavior, and sales trends across different time periods.**
 
-
+---
 ## 🎯 Project Objectives
 
-### The major objectives of this project are:
+- 📊 Analyze overall retail sales performance
+- 👥 Understand customer purchasing behavior
+- 👨‍🦱👩‍🦰 Compare purchasing behavior between different genders
+- 🛒 Identify the best-performing product categories
+- 📅 Analyze monthly and yearly sales trends
+- 📈 Identify the best-performing month in each year
+- 💰 Identify the top customers based on total spending
+- 🕐 Analyze sales according to different time shifts
+- 🔍 Identify peak shopping periods
+- 📊 Understand category preferences based on gender and time
+- 💡 Generate meaningful business insights from transactional data
 
-**1.Analyze overall retail sales performance**
-
-**2.Understand customer demographics and purchasing behavior**
-
-**3.Compare purchasing patterns between male and female customers**
-
-**4.Identify the best-performing product categories**
-
-**5.Analyze sales trends by month and year**
-
-**6.Identify the best-selling month in each year**
-
-**7.Find the top customers based on total spending**
-
-**8.Analyze sales and customer behavior across different time shifts**
-
-**9.Identify peak shopping periods**
-
-**10.Understand category preferences across genders and time shifts**
-
-**11.Clean and validate the retail transaction dataset using SQL**
-
-
-
+---
 
 ## 🗂️ Dataset Structure
 
@@ -57,7 +45,7 @@ The project uses a `RETAIL_SALES_ANALYSIS` table containing the following column
 | `total_sale` | FLOAT | Total value of the transaction |
 
 
-
+---
 ## 🛠️ Technologies & SQL Concepts Used
 
 | Category | Technologies / Concepts |
@@ -72,7 +60,7 @@ The project uses a `RETAIL_SALES_ANALYSIS` table containing the following column
 | Advanced SQL | CTEs, Subqueries, Window Functions |
 | Ranking | `RANK()` |
 
-
+---
 ## 🔄 Project Workflow
 
 ```text
@@ -100,8 +88,32 @@ Time-Shift Analysis
        ↓
 Business Insights
 ```
+---
+
+## 🧹 1.Database & Table Creation
+```
+--CREATE A DATABASE FOR RETAIL_SALES_ANALYSIS
+
+CREATE DATABASE Retail_Sales_Analysis;
 
 
+--CREATE TABLE AS RETAIL_SALES
+CREATE TABLE RETAIL_SALES
+(
+	transactions_id  INT PRIMARY KEY,
+	sale_date DATE,
+	sale_time TIME,
+	customer_id	INT,
+	gender VARCHAR(15),
+	age	INT,
+	category VARCHAR(15),
+	quantiy	INT,
+	price_per_unit FLOAT,
+	cogs FLOAT,
+	total_sale FLOAT
+);
+
+```
 
 ```sql
 CREATE DATABASE p1_retail_db;
