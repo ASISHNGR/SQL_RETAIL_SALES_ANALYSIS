@@ -1,5 +1,9 @@
 # 🛍️ Retail Sales Analysis Using SQL
 
+![SQL](https://img.shields.io/badge/Analysis-100%25%20SQL-blue)
+![Database](https://img.shields.io/badge/Database-SQL-orange)
+![Project](https://img.shields.io/badge/Project-Retail%20Sales%20Analysis-green)
+
 ---
 ## 📌 Project Overview
 
