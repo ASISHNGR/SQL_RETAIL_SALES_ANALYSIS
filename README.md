@@ -90,287 +90,759 @@ Business Insights
 ```
 ---
 
-## 🗂️ 1.Database & Table Creation
+# 🗄️ 1. Database & Table Creation
+
+## Create Database
+
 ```sql
---CREATE A DATABASE FOR RETAIL_SALES_ANALYSIS
-
 CREATE DATABASE Retail_Sales_Analysis;
-
-
---CREATE TABLE AS RETAIL_SALES
-CREATE TABLE RETAIL_SALES
-(
-	transactions_id  INT PRIMARY KEY,
-	sale_date DATE,
-	sale_time TIME,
-	customer_id	INT,
-	gender VARCHAR(15),
-	age	INT,
-	category VARCHAR(15),
-	quantiy	INT,
-	price_per_unit FLOAT,
-	cogs FLOAT,
-	total_sale FLOAT
-);
-
 ```
 
-## 🧹 2. Data Validation & Cleaning
+## Create Retail Sales Table
 
-Before performing the analysis, the dataset was checked for potential data-quality issues.
-
-### Data Validation Includes
-
-- Checking the total number of records
-- Inspecting the complete dataset
-- Identifying unique product categories
-- Checking for missing values
-- Checking for duplicate transaction IDs
-
-### Missing Value Analysis
-
-Important columns were checked for missing values:
-
-- Transaction ID
-- Sale Date
-- Sale Time
-- Customer ID
-- Gender
-- Age
-- Category
-- Quantity
-- Price per Unit
-- COGS
-- Total Sale
-
-Records containing missing values were removed before performing the main analysis.
-
-### Duplicate Analysis
-
-Duplicate transaction IDs were identified using `GROUP BY` and `HAVING`.
-
-This helped ensure that the analysis was performed on a **clean and reliable dataset**.
 ```sql
-
---FETCHING ALL THE RECORDS FROM TABLE
-SELECT * FROM RETAIL_SALES
-
-
---COUNT ALL THE RECORDS FROM TABLE FOR VALIDATING THE RECORDS IS CORRECTLY IMPORTED OR NOT 
-SELECT COUNT(*)
-FROM RETAIL_SALES
-
-
---WHAT ARE THE PRODUCTS CATEGORY WE HAVE 
-SELECT DISTINCT CATEGORY 
-FROM RETAIL_SALES
-
-
---CHECKING THE MISSING RECORDS IN THE DATASET 
-SELECT * 
-FROM RETAIL_SALES
-WHERE TRANSACTIONS_ID IS NULL 
-   OR SALE_DATE IS NULL 
-   OR SALE_TIME IS NULL 
-   OR CUSTOMER_ID IS NULL
-   OR GENDER IS NULL
-   OR AGE IS NULL	
-   OR CATEGORY IS NULL
-   OR QUANTITY IS NULL
-   OR PRICE_PER_UNIT IS NULL
-   OR COGS IS NULL
-   OR TOTAL_SALE IS NULL
-
-
---CHECKING THE DUPLICATE RECORDS
-SELECT TRANSACTIONS_ID,COUNT(TRANSACTIONS_ID) AS COUNT_TRANSACTIONS_ID
-FROM RETAIL_SALES
-GROUP BY TRANSACTIONS_ID
-HAVING COUNT(TRANSACTIONS_ID) > 1
-
-
-
-
---DATA CLEANING :--
-
---REMOVING THE MISSING RECORDS AND DUPLICATE RECORDS FROM THE TABLE
-
-
---DELETING THE MISSING RECORDS FROM THE TABLE
-DELETE FROM RETAIL_SALES
-WHERE TRANSACTIONS_ID IS NULL 
-   OR SALE_DATE IS NULL 
-   OR SALE_TIME IS NULL 
-   OR CUSTOMER_ID IS NULL
-   OR GENDER IS NULL
-   OR AGE IS NULL	
-   OR CATEGORY IS NULL
-   OR QUANTITY IS NULL
-   OR PRICE_PER_UNIT IS NULL
-   OR COGS IS NULL
-   OR TOTAL_SALE IS NULL
-
-
---DELECTING THE DUPLICATE RECORDS FROM THE TABLE
-DELETE FROM RETAIL_SALES
-WHERE TRANSACTIONS_ID IN (
-	SELECT TRANSACTIONS_ID
-	FROM RETAIL_SALES
-	GROUP BY TRANSACTIONS_ID
-	HAVING COUNT(TRANSACTIONS_ID) > 1
-	)
+CREATE TABLE RETAIL_SALES
+(
+    transactions_id INT PRIMARY KEY,
+    sale_date DATE,
+    sale_time TIME,
+    customer_id INT,
+    gender VARCHAR(15),
+    age INT,
+    category VARCHAR(15),
+    quantity INT,
+    price_per_unit FLOAT,
+    cogs FLOAT,
+    total_sale FLOAT
+);
 ```
 
 ---
 
-### 3. Data Analysis & Findings
+# 🔍 2. Data Exploration
 
-The following SQL queries were developed to answer specific business questions:
+## Fetch All Records
 
-1. **Write a SQL query to retrieve all columns for sales made on '2022-11-05**:
+```sql
+SELECT * 
+FROM RETAIL_SALES;
+```
+
+## Count Total Records
+
+This query was used to validate whether the records were imported correctly.
+
+```sql
+SELECT COUNT(*)
+FROM RETAIL_SALES;
+```
+
+## Find Available Product Categories
+
+```sql
+SELECT DISTINCT CATEGORY
+FROM RETAIL_SALES;
+```
+
+---
+
+# 🧹 3. Data Validation & Cleaning
+
+## Check Missing Records
+
+The following query checks for missing values across the important columns.
+
 ```sql
 SELECT *
-FROM retail_sales
-WHERE sale_date = '2022-11-05';
+FROM RETAIL_SALES
+WHERE TRANSACTIONS_ID IS NULL
+   OR SALE_DATE IS NULL
+   OR SALE_TIME IS NULL
+   OR CUSTOMER_ID IS NULL
+   OR GENDER IS NULL
+   OR AGE IS NULL
+   OR CATEGORY IS NULL
+   OR QUANTITY IS NULL
+   OR PRICE_PER_UNIT IS NULL
+   OR COGS IS NULL
+   OR TOTAL_SALE IS NULL;
 ```
 
-2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
+## Check Duplicate Transactions
+
 ```sql
-SELECT 
-  *
-FROM retail_sales
-WHERE 
-    category = 'Clothing'
-    AND 
-    TO_CHAR(sale_date, 'YYYY-MM') = '2022-11'
-    AND
-    quantity >= 4
+SELECT TRANSACTIONS_ID,
+       COUNT(TRANSACTIONS_ID) AS COUNT_TRANSACTIONS_ID
+FROM RETAIL_SALES
+GROUP BY TRANSACTIONS_ID
+HAVING COUNT(TRANSACTIONS_ID) > 1;
 ```
 
-3. **Write a SQL query to calculate the total sales (total_sale) for each category.**:
+## Remove Missing Records
+
 ```sql
-SELECT 
-    category,
-    SUM(total_sale) as net_sale,
-    COUNT(*) as total_orders
-FROM retail_sales
-GROUP BY 1
+DELETE FROM RETAIL_SALES
+WHERE TRANSACTIONS_ID IS NULL
+   OR SALE_DATE IS NULL
+   OR SALE_TIME IS NULL
+   OR CUSTOMER_ID IS NULL
+   OR GENDER IS NULL
+   OR AGE IS NULL
+   OR CATEGORY IS NULL
+   OR QUANTITY IS NULL
+   OR PRICE_PER_UNIT IS NULL
+   OR COGS IS NULL
+   OR TOTAL_SALE IS NULL;
 ```
 
-4. **Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.**:
+## Remove Duplicate Records
+
 ```sql
-SELECT
-    ROUND(AVG(age), 2) as avg_age
-FROM retail_sales
-WHERE category = 'Beauty'
+DELETE FROM RETAIL_SALES
+WHERE TRANSACTIONS_ID IN (
+    SELECT TRANSACTIONS_ID
+    FROM RETAIL_SALES
+    GROUP BY TRANSACTIONS_ID
+    HAVING COUNT(TRANSACTIONS_ID) > 1
+);
 ```
 
-5. **Write a SQL query to find all transactions where the total_sale is greater than 1000.**:
+---
+
+# 📊 4. Data Analysis & Business Questions
+
+The following SQL queries were used to answer real-world retail business questions.
+
+---
+
+## 1️⃣ Sales on a Specific Date
+
+### Business Question
+
+**Retrieve all sales made on `2022-11-05`.**
+
 ```sql
-SELECT * FROM retail_sales
-WHERE total_sale > 1000
+SELECT *
+FROM RETAIL_SALES
+WHERE SALE_DATE = '2022-11-05';
 ```
 
-6. **Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.**:
+---
+
+## 2️⃣ Clothing Transactions in November 2022
+
+### Business Question
+
+**Retrieve all Clothing transactions where quantity sold was greater than 3 during November 2022.**
+
 ```sql
-SELECT 
-    category,
-    gender,
-    COUNT(*) as total_trans
-FROM retail_sales
-GROUP 
-    BY 
-    category,
-    gender
-ORDER BY 1
+SELECT *
+FROM RETAIL_SALES
+WHERE CATEGORY = 'Clothing'
+  AND QUANTITY > 3
+  AND TO_CHAR(SALE_DATE, 'YYYY-MM') = '2022-11';
 ```
 
-7. **Write a SQL query to calculate the average sale for each month. Find out best selling month in each year**:
+---
+
+## 3️⃣ Total Sales by Category
+
+### Business Question
+
+**Calculate the total sales generated by each product category.**
+
 ```sql
-SELECT 
-       year,
-       month,
-    avg_sale
-FROM 
-(    
-SELECT 
-    EXTRACT(YEAR FROM sale_date) as year,
-    EXTRACT(MONTH FROM sale_date) as month,
-    AVG(total_sale) as avg_sale,
-    RANK() OVER(PARTITION BY EXTRACT(YEAR FROM sale_date) ORDER BY AVG(total_sale) DESC) as rank
-FROM retail_sales
-GROUP BY 1, 2
-) as t1
-WHERE rank = 1
+SELECT CATEGORY,
+       SUM(TOTAL_SALE) AS TOTAL_SALE
+FROM RETAIL_SALES
+GROUP BY 1;
 ```
 
-8. **Write a SQL query to find the top 5 customers based on the highest total sales **:
+---
+
+## 4️⃣ Youngest Customer
+
+### Business Question
+
+**Retrieve all data belonging to the youngest customer.**
+
 ```sql
-SELECT 
-    customer_id,
-    SUM(total_sale) as total_sales
-FROM retail_sales
+SELECT *
+FROM RETAIL_SALES
+WHERE AGE IN (
+    SELECT MIN(AGE)
+    FROM RETAIL_SALES
+);
+```
+
+---
+
+## 5️⃣ Customers by Gender
+
+### Business Question
+
+**Find the number of male and female customers.**
+
+```sql
+SELECT GENDER,
+       COUNT(GENDER) AS CUST_GENDER
+FROM RETAIL_SALES
+GROUP BY GENDER;
+```
+
+---
+
+## 6️⃣ Maximum Age of Female Customers
+
+### Business Question
+
+**Find the maximum age among female customers.**
+
+```sql
+SELECT MAX(AGE) AS AGE
+FROM RETAIL_SALES
+WHERE GENDER = 'Female';
+```
+
+---
+
+## 7️⃣ Average Age of Beauty Customers
+
+### Business Question
+
+**Find the average age of customers who purchased from the Beauty category.**
+
+```sql
+SELECT ROUND(AVG(AGE)) AS AVERAGE_AGE
+FROM RETAIL_SALES
+WHERE CATEGORY = 'Beauty';
+```
+
+---
+
+## 8️⃣ High-Value Transactions
+
+### Business Question
+
+**Find all transactions where total sales were greater than 1000.**
+
+```sql
+SELECT *
+FROM RETAIL_SALES
+WHERE TOTAL_SALE > 1000;
+```
+
+---
+
+## 9️⃣ Gender-Wise Transactions by Category
+
+### Business Question
+
+**Find the total number of transactions made by each gender in each category.**
+
+```sql
+SELECT CATEGORY,
+       GENDER,
+       COUNT(*) AS NO_OF_TRANSACTION
+FROM RETAIL_SALES
+GROUP BY CATEGORY, GENDER
+ORDER BY 1;
+```
+
+---
+
+## 🔟 Average Sales by Month & Best-Selling Month
+
+### Business Question
+
+**Calculate the average sale for each month and identify the best-selling month in each year.**
+
+```sql
+SELECT *
+FROM (
+    SELECT
+        EXTRACT(YEAR FROM SALE_DATE) AS YEAR,
+        EXTRACT(MONTH FROM SALE_DATE) AS MONTH,
+        AVG(TOTAL_SALE) AS AVG_SALE,
+        RANK() OVER (
+            PARTITION BY EXTRACT(YEAR FROM SALE_DATE)
+            ORDER BY AVG(TOTAL_SALE) DESC
+        ) AS RANK
+    FROM RETAIL_SALES
+    GROUP BY 1, 2
+)
+WHERE RANK = 1;
+```
+
+### SQL Concepts Used
+
+- `EXTRACT()`
+- `AVG()`
+- `GROUP BY`
+- `RANK()`
+- Window Functions
+- Subquery
+
+---
+
+## 1️⃣1️⃣ Top 5 Customers
+
+### Business Question
+
+**Find the top 5 customers based on the highest total sales.**
+
+```sql
+SELECT CUSTOMER_ID,
+       SUM(TOTAL_SALE) AS TOTAL_SALE
+FROM RETAIL_SALES
 GROUP BY 1
 ORDER BY 2 DESC
-LIMIT 5
+LIMIT 5;
 ```
 
-9. **Write a SQL query to find the number of unique customers who purchased items from each category.**:
+---
+
+## 1️⃣2️⃣ Unique Customers by Category
+
+### Business Question
+
+**Find the number of unique customers who purchased items from each category.**
+
 ```sql
-SELECT 
-    category,    
-    COUNT(DISTINCT customer_id) as cnt_unique_cs
-FROM retail_sales
-GROUP BY category
+SELECT CATEGORY,
+       COUNT(DISTINCT CUSTOMER_ID) AS UNIQUE_CUSTOMERS
+FROM RETAIL_SALES
+GROUP BY 1;
 ```
 
-10. **Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17)**:
+---
+
+# 🕐 5. Time-Shift Analysis
+
+The project divides customers into three time shifts based on their purchase time.
+
+| Time | Shift |
+|---|---|
+| Before 12 PM | 🌅 Morning |
+| 12 PM – 5 PM | ☀️ Afternoon |
+| After 5 PM | 🌙 Evening |
+
+The `CASE WHEN` statement is used to classify transactions into different shifts.
+
+---
+
+## 1️⃣3️⃣ Number of Orders by Time Shift
+
+### Business Question
+
+**Create time shifts and calculate the number of orders in each shift.**
+
 ```sql
-WITH hourly_sale
-AS
-(
-SELECT *,
-    CASE
-        WHEN EXTRACT(HOUR FROM sale_time) < 12 THEN 'Morning'
-        WHEN EXTRACT(HOUR FROM sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
-        ELSE 'Evening'
-    END as shift
-FROM retail_sales
+WITH HOURLY_SALE AS (
+    SELECT *,
+        CASE
+            WHEN EXTRACT(HOUR FROM SALE_TIME) < 12
+                THEN 'MORNING'
+            WHEN EXTRACT(HOUR FROM SALE_TIME) BETWEEN 12 AND 17
+                THEN 'AFTERNOON'
+            ELSE 'EVENING'
+        END AS TIME_SHIFT
+    FROM RETAIL_SALES
 )
-SELECT 
-    shift,
-    COUNT(*) as total_orders    
-FROM hourly_sale
-GROUP BY shift
+SELECT TIME_SHIFT,
+       COUNT(*)
+FROM HOURLY_SALE
+GROUP BY TIME_SHIFT;
 ```
 
-## Findings
+---
 
-- **Customer Demographics**: The dataset includes customers from various age groups, with sales distributed across different categories such as Clothing and Beauty.
-- **High-Value Transactions**: Several transactions had a total sale amount greater than 1000, indicating premium purchases.
-- **Sales Trends**: Monthly analysis shows variations in sales, helping identify peak seasons.
-- **Customer Insights**: The analysis identifies the top-spending customers and the most popular product categories.
+## 1️⃣4️⃣ Time Shift with Highest Number of Orders
 
-## Reports
+### Business Question
 
-- **Sales Summary**: A detailed report summarizing total sales, customer demographics, and category performance.
-- **Trend Analysis**: Insights into sales trends across different months and shifts.
-- **Customer Insights**: Reports on top customers and unique customer counts per category.
+**Identify the time shift with the highest number of orders.**
 
-## Conclusion
+```sql
+WITH HOURLY_SALE AS (
+    SELECT *,
+        CASE
+            WHEN EXTRACT(HOUR FROM SALE_TIME) < 12
+                THEN 'MORNING'
+            WHEN EXTRACT(HOUR FROM SALE_TIME) BETWEEN 12 AND 17
+                THEN 'AFTERNOON'
+            ELSE 'EVENING'
+        END AS TIME_SHIFT
+    FROM RETAIL_SALES
+)
+SELECT TIME_SHIFT,
+       COUNT(*) AS NO_OF_ORDERS
+FROM HOURLY_SALE
+GROUP BY TIME_SHIFT
+ORDER BY 2 DESC;
+```
 
-This project focuses on performing a comprehensive Retail Sales Analysis using SQL to uncover meaningful insights from retail transaction data. The analysis explores sales trends, customer purchasing behavior, gender-based purchasing patterns, time-based sales performance, and monthly/yearly revenue trends.
+---
 
-The primary objective of this project is to transform raw retail transaction data into actionable business insights that can help understand customer behavior, identify high-performing periods, and support data-driven business decisions.
+## 1️⃣5️⃣ Time Shift with Highest Total Sales
 
-## How to Use
+### Business Question
 
-1. **Clone the Repository**: Clone this project repository from GitHub.
-2. **Set Up the Database**: First set up a database on any SQL platform like PostgreSQL , MySQL and populate the database.
-3. **Run the Queries**: Use the SQL queries provided in the `RETAIL_SALE_ANALYSIS.sql` file to perform your analysis.
-4. **Explore and Modify**: Feel free to modify the queries to explore different aspects of the dataset or answer additional business questions.
+**Identify the time shift that generates the highest total sales.**
 
-## Author - Asish Kumar Sahoo
+```sql
+WITH HOURLY_SALE AS (
+    SELECT *,
+        CASE
+            WHEN EXTRACT(HOUR FROM SALE_TIME) < 12
+                THEN 'MORNING'
+            WHEN EXTRACT(HOUR FROM SALE_TIME) BETWEEN 12 AND 17
+                THEN 'AFTERNOON'
+            ELSE 'EVENING'
+        END AS TIME_SHIFT
+    FROM RETAIL_SALES
+)
+SELECT TIME_SHIFT,
+       SUM(TOTAL_SALE) AS TOTAL_SALE
+FROM HOURLY_SALE
+GROUP BY TIME_SHIFT
+ORDER BY 2 DESC;
+```
 
+---
+
+## 1️⃣6️⃣ Time Shift with Highest Unique Customers
+
+### Business Question
+
+**Identify the time shift with the highest number of unique customers.**
+
+```sql
+WITH HOURLY_SALE AS (
+    SELECT *,
+        CASE
+            WHEN EXTRACT(HOUR FROM SALE_TIME) < 12
+                THEN 'MORNING'
+            WHEN EXTRACT(HOUR FROM SALE_TIME) BETWEEN 12 AND 17
+                THEN 'AFTERNOON'
+            ELSE 'EVENING'
+        END AS TIME_SHIFT
+    FROM RETAIL_SALES
+)
+SELECT TIME_SHIFT,
+       COUNT(DISTINCT CUSTOMER_ID) AS UNIQUE_CUSTOMERS
+FROM HOURLY_SALE
+GROUP BY TIME_SHIFT
+ORDER BY 2 DESC;
+```
+
+---
+
+# 👨‍🦱👩‍🦰 6. Gender & Time-Shift Analysis
+
+The project combines **gender analysis and time-shift analysis** to understand customer behavior in greater detail.
+
+---
+
+## 1️⃣7️⃣ Transactions by Gender in Each Time Shift
+
+### Business Question
+
+**Find the total number of transactions made by each gender in each time shift.**
+
+```sql
+WITH HOURLY_SALE AS (
+    SELECT *,
+        CASE
+            WHEN EXTRACT(HOUR FROM SALE_TIME) < 12
+                THEN 'MORNING'
+            WHEN EXTRACT(HOUR FROM SALE_TIME) BETWEEN 12 AND 17
+                THEN 'AFTERNOON'
+            ELSE 'EVENING'
+        END AS TIME_SHIFT
+    FROM RETAIL_SALES
+)
+SELECT TIME_SHIFT,
+       GENDER,
+       COUNT(*) AS NO_OF_TRANSACTION
+FROM HOURLY_SALE
+GROUP BY TIME_SHIFT, GENDER;
+```
+
+---
+
+## 1️⃣8️⃣ Highest Sale by Gender in Each Shift
+
+### Business Question
+
+**Find the highest total sale made by each gender in each time shift.**
+
+```sql
+WITH HOURLY_SALE AS (
+    SELECT *,
+        CASE
+            WHEN EXTRACT(HOUR FROM SALE_TIME) < 12
+                THEN 'MORNING'
+            WHEN EXTRACT(HOUR FROM SALE_TIME) BETWEEN 12 AND 17
+                THEN 'AFTERNOON'
+            ELSE 'EVENING'
+        END AS TIME_SHIFT
+    FROM RETAIL_SALES
+)
+SELECT TIME_SHIFT,
+       GENDER,
+       MAX(TOTAL_SALE) AS HIGHEST_TOTAL_SALE
+FROM HOURLY_SALE
+GROUP BY TIME_SHIFT, GENDER
+ORDER BY 1, 2;
+```
+
+---
+
+# 🛒 7. Category & Time-Shift Analysis
+
+---
+
+## 1️⃣9️⃣ Highest Transaction Category in Each Shift
+
+### Business Question
+
+**Find which category has the highest number of transactions in each time shift.**
+
+```sql
+WITH HOURLY_SALE AS (
+    SELECT *,
+        CASE
+            WHEN EXTRACT(HOUR FROM SALE_TIME) < 12
+                THEN 'MORNING'
+            WHEN EXTRACT(HOUR FROM SALE_TIME) BETWEEN 12 AND 17
+                THEN 'AFTERNOON'
+            ELSE 'EVENING'
+        END AS TIME_SHIFT
+    FROM RETAIL_SALES
+)
+SELECT TIME_SHIFT,
+       CATEGORY,
+       COUNT(*) AS NO_OF_TRANSACTION
+FROM HOURLY_SALE
+GROUP BY TIME_SHIFT, CATEGORY
+ORDER BY TIME_SHIFT, COUNT(*) DESC;
+```
+
+---
+
+## 2️⃣0️⃣ Category Preference by Gender and Time Shift
+
+### Business Question
+
+**Find which category is preferred by each gender in each time shift.**
+
+```sql
+WITH HOURLY_SALE AS (
+    SELECT *,
+        CASE
+            WHEN EXTRACT(HOUR FROM SALE_TIME) < 12
+                THEN 'MORNING'
+            WHEN EXTRACT(HOUR FROM SALE_TIME) BETWEEN 12 AND 17
+                THEN 'AFTERNOON'
+            ELSE 'EVENING'
+        END AS TIME_SHIFT
+    FROM RETAIL_SALES
+)
+SELECT TIME_SHIFT,
+       GENDER,
+       CATEGORY,
+       COUNT(*) AS NO_OF_TRANSACTION
+FROM HOURLY_SALE
+GROUP BY TIME_SHIFT, GENDER, CATEGORY
+ORDER BY TIME_SHIFT, GENDER, COUNT(*) DESC;
+```
+
+---
+
+---
+# 📈 Key Analysis Areas
+
+This project covers the following major analytical areas:
+
+| Analysis Area | SQL Techniques |
+|---|---|
+| Data Exploration | `SELECT`, `COUNT`, `DISTINCT` |
+| Data Validation | `IS NULL`, `COUNT` |
+| Data Cleaning | `DELETE`, Subquery |
+| Sales Analysis | `SUM`, `AVG`, `GROUP BY` |
+| Customer Analysis | `COUNT(DISTINCT)`, `MIN`, `MAX` |
+| Gender Analysis | `GROUP BY`, `COUNT` |
+| Monthly Analysis | `EXTRACT`, `AVG` |
+| Yearly Analysis | `EXTRACT`, `RANK()` |
+| Top Customers | `SUM`, `ORDER BY`, `LIMIT` |
+| Time Analysis | `EXTRACT(HOUR)` |
+| Time Shifts | `CASE WHEN` |
+| Advanced Analysis | CTEs, Subqueries, Window Functions |
+
+---
+# 💡 Business Insights
+
+The analysis helps answer important questions about:
+
+### 👥 Customer Behavior
+
+- Who are the youngest customers?
+- How many male and female customers are present?
+- Which categories attract the most unique customers?
+- Who are the highest-spending customers?
+
+### 💰 Sales Performance
+
+- Which category generates the highest sales?
+- Which transactions generate more than 1000 in sales?
+- Which month performs best in each year?
+
+### 🕐 Time-Based Behavior
+
+- Which shift has the highest number of orders?
+- Which shift generates the highest sales?
+- Which shift attracts the most unique customers?
+
+### 👨‍🦱👩‍🦰 Gender-Based Behavior
+
+- How many transactions are made by each gender?
+- Which gender has the highest transaction value during each shift?
+- Which categories are preferred by each gender?
+
+### 🛒 Product Category Behavior
+
+- Which category has the highest number of transactions in each shift?
+- Which categories are preferred by different customer groups?
+
+---
+
+# 📌 Business Applications
+
+The insights generated from this project can help businesses with:
+
+- 📦 **Inventory Planning**
+- 🎯 **Targeted Marketing**
+- 👥 **Customer Segmentation**
+- 🕐 **Staff Scheduling**
+- 📈 **Sales Planning**
+- 🛍️ **Product Promotion**
+- 💰 **Revenue Optimization**
+- 📊 **Data-Driven Decision Making**
+
+---
+
+# 📁 Project Structure
+
+```text
+Retail-Sales-Analysis/
+│
+├── RETAIL_SALE_ANALYSIS.sql
+│
+└── README.md
+```
+
+---
+
+# ▶️ How to Run the Project
+
+### 1. Clone the Repository
+
+```bash
+git clone <your-repository-url>
+```
+
+### 2. Navigate to the Project
+
+```bash
+cd Retail-Sales-Analysis
+```
+
+### 3. Open the SQL File
+
+Open:
+
+```text
+RETAIL_SALE_ANALYSIS.sql
+```
+
+using your preferred SQL environment.
+
+### 4. Create the Database
+
+```sql
+CREATE DATABASE Retail_Sales_Analysis;
+```
+
+### 5. Create the Table
+
+Run the `CREATE TABLE RETAIL_SALES` query from the SQL file.
+
+### 6. Import the Dataset
+
+Import the retail sales dataset into the `RETAIL_SALES` table.
+
+### 7. Run the Queries
+
+Execute the SQL queries sequentially to reproduce the analysis.
+
+---
+
+# 🧠 What I Learned
+
+Through this project, I developed practical experience in:
+
+- Writing SQL queries for real-world business problems
+- Data cleaning using SQL
+- Data validation
+- Exploratory Data Analysis
+- Customer behavior analysis
+- Sales analysis
+- Gender-based analysis
+- Time-based analysis
+- Monthly and yearly trend analysis
+- CTEs
+- Subqueries
+- Window Functions
+- `RANK()`
+- Data aggregation
+- Translating business questions into SQL queries
+- Extracting actionable insights from transactional data
+
+---
+
+# 🚀 Future Improvements
+
+This project can be further enhanced by:
+
+- 📊 Creating an interactive **Power BI dashboard**
+- 🐍 Connecting SQL with **Python**
+- 👥 Performing **RFM Customer Segmentation**
+- 💰 Adding profit and profit-margin analysis
+- 📈 Performing Year-over-Year growth analysis
+- 🔮 Building sales forecasting models
+- 👤 Performing Customer Lifetime Value analysis
+- 📅 Performing cohort analysis
+- 🤖 Applying Machine Learning for customer prediction
+
+---
+
+# 👨‍💻 Author
+
+## **Asish Kumar Sahoo**
+
+🎯 Aspiring **Data Analyst | AI/ML Engineer**
+
+### Technical Skills
+
+`SQL` • `Python` • `Excel` • `Power BI` • `Data Analysis` • `Statistical Analysis`
+
+---
+
+# ⭐ Project Highlights
+
+> **This project demonstrates how SQL can be used to transform raw retail transaction data into meaningful business insights by analyzing customer behavior, sales trends, product categories, gender patterns, and time-based purchasing behavior.**
+
+If you find this project useful, consider giving the repository a ⭐ **Star**!
 This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
 
